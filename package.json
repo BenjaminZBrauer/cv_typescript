@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.0",
     "@rollup/plugin-typescript": "^11.1.0",
     "@types/jest": "^29.5.0",
     "browser-sync": "^2.29.1",
@@ -20,7 +21,7 @@
     "watch": "npx rollup --config rollup.config.js --config-dev --watch",
     "compile": "npx rollup --config rollup.config.js",
     "clean": "npx rimraf public/js/*",
-    "dev": "run-p clean compile watch browsersync",
+    "dev": "run-p watch browsersync",
     "build": "run-s clean compile",
     "test": "npx jest"
   },

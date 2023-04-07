@@ -1,20 +1,33 @@
 import typescript from "@rollup/plugin-typescript"
+import terser from "@rollup/plugin-terser" 
+import * as fs from "fs"
+import path from "path"
+import { error } from "console"
 
-function operatingMode() {
-    return !!(process.argv.find(el => el == "--config-dev"))
+const dir = "src/ts"
+
+function isDev() {
+    return !!process.argv.find(el => el == "--config-dev")
 }
-export default [
-    {
-        input: "src/ts/app.ts",
+
+let files = fs.readdirSync(dir).filter(el => path.extname(el) === ".ts").map(el => dir + "/" + el)
+if (!files.length){
+    throw new Error(`No sources found in: ${dir}`)
+}
+
+export default files.map(el => {
+    return {
+        input: el,
         output: {
             dir: "public/js",
             format: "esm",
-            sourcemap: operatingMode()
+            sourcemap: isDev()
         },
         plugins: [
             typescript({
                 tsconfig: "./tsconfig.json"
-            })
+            }),
+            !isDev() ? terser() : null
         ]
     }
-]
+})
