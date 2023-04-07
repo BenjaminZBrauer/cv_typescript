@@ -2,9 +2,12 @@ import typescript from "@rollup/plugin-typescript"
 import terser from "@rollup/plugin-terser" 
 import { isDev, files } from "./.build/Rollup.js"
 
-export default files("src/ts").map(el => {
-    return {
-        input: el,
+export default [
+    {
+        input: [
+            ...files("src/ts"),
+            ...files("src/ts/pages")
+        ],
         output: {
             dir: "public/js",
             format: "esm",
@@ -17,4 +20,4 @@ export default files("src/ts").map(el => {
             !isDev() ? terser() : null
         ]
     }
-})
+] 
