@@ -1,21 +1,8 @@
 import typescript from "@rollup/plugin-typescript"
 import terser from "@rollup/plugin-terser" 
-import * as fs from "fs"
-import path from "path"
-import { error } from "console"
+import { isDev, files } from "./.build/Rollup.js"
 
-const dir = "src/ts"
-
-function isDev() {
-    return !!process.argv.find(el => el == "--config-dev")
-}
-
-let files = fs.readdirSync(dir).filter(el => path.extname(el) === ".ts").map(el => dir + "/" + el)
-if (!files.length){
-    throw new Error(`No sources found in: ${dir}`)
-}
-
-export default files.map(el => {
+export default files("src/ts").map(el => {
     return {
         input: el,
         output: {
