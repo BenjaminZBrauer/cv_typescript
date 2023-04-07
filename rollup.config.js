@@ -1,5 +1,6 @@
 import typescript from "@rollup/plugin-typescript"
 import terser from "@rollup/plugin-terser" 
+import clear from "rollup-plugin-clear"
 import { isDev, files } from "./.build/Rollup.js"
 
 export default [
@@ -14,6 +15,10 @@ export default [
             sourcemap: isDev()
         },
         plugins: [
+            clear({
+                targets:['public/js'],
+                watch: true
+            }),
             typescript({
                 tsconfig: "./tsconfig.json"
             }),
