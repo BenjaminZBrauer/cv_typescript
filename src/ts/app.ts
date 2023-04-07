@@ -10,4 +10,4 @@ new Foo();
    dog.bark()
 })()
 
-console.log("ts");
+console.log("main entry point file.");
