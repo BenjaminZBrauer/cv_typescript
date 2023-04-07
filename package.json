@@ -1,0 +1,21 @@
+{
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.1.0",
+    "@types/jest": "^29.5.0",
+    "browser-sync": "^2.29.1",
+    "jest": "^29.5.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^4.4.1",
+    "rollup": "^3.20.2",
+    "typescript": "^5.0.3"
+  },
+  "scripts": {
+    "browsersync": "npx browser-sync start --server 'public' --port 5000 --files 'public'",
+    "watch": "npx tsc --project tsconfig.dev.json --watch",
+    "dev": "run-p watch browsersync",
+    "compile": "npx tsc --project tsconfig.prod.json",
+    "clean": "npx rimraf public/js/*",
+    "build": "run-s clean compile",
+    "test": "npx jest"
+  }
+}
