@@ -17,10 +17,10 @@
   },
   "scripts": {
     "browsersync": "npx browser-sync start --server 'public' --port 5000 --files 'public'",
-    "watch": "npx rollup --config rollup.config.js --watch",
-    "dev": "run-p watch browsersync",
-    "compile": "npx rollup --config rollup.config.js --project tsconfig.prod.json",
+    "watch": "npx rollup --config rollup.config.js --config-dev --watch",
+    "compile": "npx rollup --config rollup.config.js",
     "clean": "npx rimraf public/js/*",
+    "dev": "run-p clean compile watch browsersync",
     "build": "run-s clean compile",
     "test": "npx jest"
   },
