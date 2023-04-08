@@ -1,9 +1,11 @@
 import typescript from "@rollup/plugin-typescript"
 import terser from "@rollup/plugin-terser" 
 import clear from "rollup-plugin-clear"
+import polyfill from "rollup-plugin-polyfill"
+import resolve from "@rollup/plugin-node-resolve"
 import { isDev, files } from "./.build/Rollup.js"
 
-export default [
+export default [     
     {
         input: [
             ...files("src/ts"),
@@ -37,6 +39,10 @@ export default [
             dir: "public/lib"
         },
         plugins: [
+            resolve(),
+            polyfill([
+                "promise-polyfill/src/polyfill"
+            ]),
             terser(
                 {
                     format: {
