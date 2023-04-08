@@ -14,6 +14,7 @@
     "rimraf": "^4.4.1",
     "rollup": "^3.20.2",
     "rollup-plugin-clear": "^2.0.7",
+    "systemjs": "^6.14.1",
     "tslib": "^2.5.0",
     "typescript": "^5.0.3"
   },
@@ -22,8 +23,8 @@
     "watch": "npx rollup --config rollup.config.js --config-dev --watch",
     "compile": "npx rollup --config rollup.config.js",
     "clean": "npx rimraf public/js/*",
-    "dev": "run-p clean watch browsersync",
-    "build": "run-s clean compile",
+    "dev": "run-p watch browsersync",
+    "build": "run-s compile",
     "test": "npx jest"
   },
   "keywords": [],

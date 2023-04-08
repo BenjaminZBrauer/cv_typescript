@@ -11,7 +11,7 @@ export default [
         ],
         output: {
             dir: "public/js",
-            format: "esm",
+            format: "system",
             sourcemap: isDev()
         },
         plugins: [
@@ -22,7 +22,29 @@ export default [
             typescript({
                 tsconfig: "./tsconfig.json"
             }),
-            !isDev() ? terser() : null
+            !isDev() && terser(
+                {
+                    format: {
+                        comments: false
+                    }
+                }
+            )
         ]
+    },
+    {
+        input: "node_modules/systemjs/dist/system.js",
+        output: {
+            dir: "public/lib"
+        },
+        plugins: [
+            terser(
+                {
+                    format: {
+                        comments: false
+                    }
+                }
+            )
+        ]
+
     }
 ] 
